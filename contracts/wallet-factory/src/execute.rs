@@ -38,14 +38,14 @@ impl<'a> WalletFactoryContract<'a>  {
         msg: ExecuteMsg,
     ) -> Result<Response, ContractError> {
         match msg {
-            ExecuteMsg::InitWallet {} => self.init_wallet(deps, env, info),
+            ExecuteMsg::CreateWallet {} => self.create_wallet(deps, env, info),
             ExecuteMsg::Callback(callback_msg) => self.handle_wallet_callback(deps, env, info, callback_msg),
         }
     }
 }
 
 impl<'a> WalletFactoryContract<'a>  {
-    pub fn init_wallet(&self, deps: DepsMut, _env: Env, info: MessageInfo) -> Result<Response, ContractError> {
+    pub fn create_wallet(&self, deps: DepsMut, _env: Env, info: MessageInfo) -> Result<Response, ContractError> {
         let config = self.config.load(deps.storage)?;
 
         Ok(Response::new().add_message(
